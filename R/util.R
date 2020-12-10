@@ -85,16 +85,7 @@ installAndLoad <- function(pkg)
             "\n  args: ", args,
             "\n", sep="")
     system2(cmd, args)
-        return()
-        handleError(pkg, " must be installable.")
-    
-    pkgname <- strsplit(basename(pkg), "_")[[1]][1]
-    args <- list(package=pkgname, lib.loc=libdir)
-    if (paste0("package:",pkgname) %in% search())
-        suppressWarnings(unloadNamespace(pkgname))
-
-    suppressPackageStartupMessages(do.call(library, args))
-    install_dir
+    return()
 }
 
 # Takes as input the value of an Imports, Depends,
