@@ -84,12 +84,10 @@ installAndLoad <- function(pkg)
         cat("  cmd: ", cmd,
             "\n  args: ", args,
             "\n", sep="")
-    system2(cmd, args, stdout=NULL, stderr=stderr)
-    if (res != 0)
-    {
+    system2(cmd, args)
         return()
         handleError(pkg, " must be installable.")
-    }
+    
     pkgname <- strsplit(basename(pkg), "_")[[1]][1]
     args <- list(package=pkgname, lib.loc=libdir)
     if (paste0("package:",pkgname) %in% search())
