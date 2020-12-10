@@ -81,14 +81,13 @@ installAndLoad <- function(pkg)
     cmd <- file.path(Sys.getenv("R_HOME"), "bin", "R")
     args <- sprintf("--vanilla CMD INSTALL --no-test-load --library=%s %s",
                     libdir, shQuote(pkg))
-    res <- system2(cmd, args, stdout=NULL, stderr=stderr)
-    if (res != 0)
-    {
         cat("  cmd: ", cmd,
             "\n  args: ", args,
-            "\n  stderr:",
-            "\n  ", paste(readLines(stderr), collapse="\n  "),
             "\n", sep="")
+    system2(cmd, args, stdout=NULL, stderr=stderr)
+    if (res != 0)
+    {
+        return()
         handleError(pkg, " must be installable.")
     }
     pkgname <- strsplit(basename(pkg), "_")[[1]][1]
